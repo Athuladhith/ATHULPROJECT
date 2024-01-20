@@ -1,0 +1,229 @@
+ {{!-- {{>adminheader}}  --}}
+
+ <html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    .navbar {
+      background-color: #d39292;
+      ;
+      color: #fff;
+      font-size: 1.6rem;
+      padding: 20px 30px;
+    }
+
+    .navbar a {
+      color: #f1eded;
+      text-decoration: none;
+    }
+
+    .navbar a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+
+
+
+
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/users">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/category">Category</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/order">Orders</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/product">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/coupon">Coupon</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="/admin/showoffers">offers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/addoffer">Add offers</a>
+        </li>
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9"></script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Edit Category</title>
+  {{!-- <link rel="stylesheet" type="text/css" href="/css/editcategory.css"> --}}
+  <link rel="stylesheet" href="/stylesheets/editcategory.css">
+
+  <style>
+ body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa; /* Optional: Set a background color */
+    }
+
+    .navbar {
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      width: 100%;
+      height: 60px; /* Adjust the height as needed */
+      background-color: #d39292;
+      color: #fff;
+      font-size: 1.6rem;
+      padding: 20px 30px;
+    }
+
+    .form-container {
+      position: absolute;
+      top: 60px; /* Adjust the top position to match the navbar height */
+      left: 50%;
+      transform: translate(-50%, 0);
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+    }
+
+    .navbar a {
+      color: #f1eded;
+      text-decoration: none;
+    }
+
+    .navbar a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .form-field {
+      margin-bottom: 20px;
+    }
+
+    .submit-button {
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .image-preview {
+      margin-top: 10px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    </style>
+</head>
+
+
+
+<body>
+  <div class="form-container">
+    <h1 class="text-center">Edit Category</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+
+
+    
+
+      <div class="form-field">
+        <label for="name">Name:</label>
+        <input type="text" id="name" value="{{category.name }}" required name="name" class="form-control">
+      </div>
+
+      <div class="form-field">
+        <label for="image">Image:</label>
+        <img src="/uploads/{{category.image}}" alt="{{@index}}" width="100px" height="100px" class="img-thumbnail">
+      </div>
+
+      <div class="form-field">
+        <label for="image">Choose New Image:</label>
+        <input type="file" id="image" name="image" value={{category.image }} accept="image/*" onchange="previewImage(event)" class="form-control">
+        <div class="image-preview"></div>
+      </div>
+
+      <div>
+        <p style="color: rgb(183, 6, 6);">
+          {{message}}
+        </p>
+      </div>
+
+      <button class="submit-button" type="submit">Submit</button>
+
+      <input type="hidden" name="id" value="{{category._id }}">
+    </form>
+  </div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    function previewImage(event) {
+      const preview = document.querySelector('.image-preview');
+      preview.innerHTML = '';
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const img = new Image();
+        img.src = event.target.result;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        preview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+
+</html>  
+
+
