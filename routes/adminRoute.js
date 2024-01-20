@@ -47,10 +47,10 @@ admin_route.get('/deletecoupon/:id', adminAuth.isLogin,adminController.removecou
 
 
 admin_route.get('/category', adminAuth.isLogin, categoryController.listCategory);
-admin_route.get('/addcategory',adminAuth.isLogin, categoryController.loadAddCategory);
-admin_route.post('/addcategory',adminAuth.isLogin,store.store.single('image'),categoryController.insertCategory)
-admin_route.get('/editcategory',adminAuth.isLogin,categoryController.loadEditCategory)
-admin_route.post('/editcategory',adminAuth.isLogin,store.store.single('image'), categoryController.updateCategoy)
+admin_route.get('/addCategory',adminAuth.isLogin, categoryController.loadAddCategory);
+admin_route.post('/addCategory',adminAuth.isLogin,store.store.single('image'),categoryController.insertCategory)
+admin_route.get('/editCategory',adminAuth.isLogin,categoryController.loadEditCategory)
+admin_route.post('/editCategory',adminAuth.isLogin,store.store.single('image'), categoryController.updateCategoy)
 admin_route.get('/deletecategory',adminAuth.isLogin,categoryController.deleteCategory)
 
 admin_route.get('/order', adminAuth.isLogin,adminController.orderHistory)
