@@ -21,7 +21,7 @@ const listCategory = async (req, res) => {
 
 const loadAddCategory = async (req, res) => {
     try {
-        res.render("admin/addcategory");
+        res.render("admin/addCategory");
     } catch (error) {
         console.log(error.message);
     }
@@ -37,9 +37,9 @@ const insertCategory = async (req, res) => {
         const categoryData = await Category.findOne({ name: nameLo });
         if (name.trim() == '') {
             
-            res.render("admin/addcategory", { message1: "Please enter valid name" })
+            res.render("admin/addCategory", { message1: "Please enter valid name" })
         } else if (categoryData) {
-            res.render("admin/addcategory", { message1: "Category exixts" });
+            res.render("admin/addCategory", { message1: "Category exixts" });
         } else {
 
             const category = new Category({
@@ -49,7 +49,7 @@ const insertCategory = async (req, res) => {
             });
             const categoryy = await category.save();
 
-            res.render("admin/addcategory", {
+            res.render("admin/addCategory", {
                 message: "Category added successfully",
             });
         }
@@ -65,7 +65,7 @@ const loadEditCategory = async (req, res) => {
         const id = req.query.id;
         const categoryData = await Category.findById({ _id: id });
         if (categoryData) {
-            res.render("admin/editcategory", { category: categoryData })
+            res.render("admin/editCategory", { category: categoryData })
         } else {
             res.redirect("admin/category");
         }
@@ -89,7 +89,7 @@ const updateCategoy = async (req, res) => {
             category => category.name.toLowerCase() === nameLo && category._id != id
         );
         if (existingCategory) {
-            return res.render("admin/editcategory", { message: "Category exists" });
+            return res.render("admin/editCategory", { message: "Category exists" });
         }
 
 
@@ -99,7 +99,7 @@ const updateCategoy = async (req, res) => {
             { new: true }
         );
         if (!updateCategoy) {
-            return res.status(404).render("admin/editcategory", { message: "Caegory not found" })
+            return res.status(404).render("admin/editCategory", { message: "Caegory not found" })
         }
 
         res.redirect("/admin/category");
